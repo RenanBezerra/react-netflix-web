@@ -1,20 +1,86 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Filme from '../../components/Filme'
 const Home = () => {
 
-const listaFilmes = [
-    {nome: 'Filme 1', ano: 2020, cateforia: 'Terror'},
-    {nome: 'Filme 2', ano: 2021, cateforia: 'Terror'},
-    {nome: 'Filme 3', ano: 2022, cateforia: 'Terror'},
-    {nome: 'Filme 4', ano: 2023, cateforia: 'Terror'},
-    {nome: 'Filme 5', ano: 2024, cateforia: 'Terror'}
-]
+
+const [filmes, setFilmes] = useState([]);
+const [filme, setFilme] = useState({
+    nome: '',
+    ano: 0,
+    categoria: null,
+});
+const cadastrar = () => {
+    setFilmes([filme, ...filmes]);
+};
+useEffect(() => {
+    alert("filmes mudou")
+},[filmes]);
+
+useEffect(() => {
+   console.log("componente carregou");
+},[]);
+
 
     return (
         <div className="container">
             <br/>
             <h1>Lista Filmes</h1>
             <br/>
+            <div className="jumbotron">
+                <div className="row">
+                  <div className="col-4">
+                        <label>Nome</label>
+                        <input 
+                        type="text" 
+                        className="form-control" 
+                        placeholder="Nome do Filme"
+                        onChange={(e) => {
+                            setFilme({
+                                ...filme,
+                                nome: e.target.value
+                            });
+                        }}
+                        />
+                    </div>
+                    <div className="col-4">
+                        <label>Categoria</label>
+                        <select 
+                        onChange={(e) => {
+                            setFilme({
+                                ...filme,
+                                categoria: e.target.value
+                            });
+                        }}
+                        className="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                        </select>
+                    </div>
+                    <div className="col-4">
+                        <label>Ano</label>
+                        <input 
+                        onChange={(e) => {
+                            setFilme({
+                                ...filme,
+                                ano: e.target.value
+                            });
+                        }}
+                        type="number" className="form-control" />
+                    </div>
+
+                   
+                </div>
+                <br/>
+                <button 
+                onClick={cadastrar}
+                className="btn btn-success btn-lg btn-block" >Cadastrar</button>
+                    
+
+            </div>
+            <br/>
+            
             <table class="table table-striped">
             <thead>
                 <tr>
@@ -26,7 +92,7 @@ const listaFilmes = [
             </thead>
             <tbody>
 
-            {listaFilmes.map(filme => (<Filme filme={filme}/>))}
+            {filmes.map(filme => (<Filme filme={filme}/>))}
               
             </tbody>
             </table>

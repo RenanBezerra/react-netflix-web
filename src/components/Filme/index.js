@@ -9,7 +9,7 @@ const Filme = ({filme}) => {
     return (
         <tr>
                 <td>{filme.nome}</td>
-                <td>{filme.cateforia}</td>
+                <td>{filme.categoria}</td>
                 <td>{filme.ano}</td>
                 <td className="text-right">
                     <button className="btn btn-info" onClick={mostrarNome}>Informações</button>
